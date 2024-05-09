@@ -1,5 +1,5 @@
 package models;
-
+//hibernateのスキーマ生成のところでテーブルの自動作成を設定している
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -7,9 +7,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;//主キーを自動採番
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
+
+//JPQLと呼ばれる特殊なSQL文（これは複数のデータを取得するメソッド）
+@NamedQueries({
+    @NamedQuery(
+        name = "getAllMessages",
+        query = "SELECT m FROM Message AS m ORDER BY m.id DESC"
+    )
+})
+
 @Table(name = "messages")
 public class Message {
     @Id
